@@ -1,5 +1,4 @@
-function Cart({ cart, removeFromCart }) {
-  // const orderTotal = cart.reduce((acc, curr) => {return acc + curr.price});
+function Cart({ cart, removeFromCart, orderTotal }) {
 
   return (
     <div className="bg-[hsl(20,50%,98%)] md:w-1/3 p-4">
@@ -21,7 +20,6 @@ function Cart({ cart, removeFromCart }) {
       ) : (
         <ul className="mt-4 flex flex-col gap-3">
           {cart.map((cartItem) => {
-            const orderTotal = cart.reduce((acc, cartItem) => acc + (cartItem.price * cartItem.quantity).toFixed(2));
 
             return (
               <li key={cartItem.name} className=" border-[hsl(7,20%,60%)] ">
@@ -53,16 +51,34 @@ function Cart({ cart, removeFromCart }) {
               </li>
             );
           })}
-          <li>
-            <span>
-                Order Total
-            </span>
-            <span>
-                {orderTotal}
-            </span>
-          </li>
         </ul>
       )}
+
+      {cart.length > 0 && (
+        <div className="flex flex-col gap-4 mt-4">
+          <div className="flex justify-between">
+            <span>
+              Order Total
+            </span>
+            <span className="font-bold text-[hsl(14,65%,9%)] text-3xl flex items-center">
+              ${orderTotal}
+            </span>
+          </div>
+
+          <div className="flex justify-center gap-4 bg-[hsl(13,31%,94%)] p-2 rounded-md">
+            <img src="/assets/images/icon-carbon-neutral.svg" alt="carbon neutral icon" />
+            <p>
+              This is a  <span className="font-semibold">carbon-neutral</span> delivery
+            </p>
+          </div>
+
+          <button className="bg-[hsl(14,86%,42%)] text-[hsl(13,31%,94%)] px-4 py-2 rounded-3xl w-full cursor-pointer">
+            Confirm Order
+          </button>
+          
+        </div>
+      )}
+      
     </div>
   );
 }

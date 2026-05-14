@@ -42,13 +42,15 @@ function Container() {
     setCart(cart.filter((i) => i.name !== item.name))
   }
 
+  const orderTotal = cart.reduce((curr, cartItem) => curr + cartItem.price * cartItem.quantity, 0).toFixed(2);
+
   return (
     <div className="max-md:px-4 max-md:py-8 md:p-12 lg:p-16 flex flex-col md:flex-row gap-4">
       {/* GRID SECTION */}
       <DessertsGrid data={data} addToCart={addToCart} />
       
       {/* CART SECTION */}
-      <Cart cart={cart} removeFromCart={removeFromCart} />
+      <Cart cart={cart} removeFromCart={removeFromCart} orderTotal={orderTotal} />
     </div>
   );
 }
